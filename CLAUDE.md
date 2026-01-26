@@ -13,12 +13,13 @@ This is a Flutter application built as an educational language learning app (Eli
 flutter pub get
 ```
 
-### Code Generation (Required after changes to models/stores)
+### Code Generation
+Run after modifying MobX stores, JSON models, or Retrofit APIs:
 ```bash
 flutter packages pub run build_runner build --delete-conflicting-outputs
 ```
 
-### Watch Mode for Code Generation
+Watch mode (auto-regenerates on file changes):
 ```bash
 flutter packages pub run build_runner watch
 ```
@@ -28,9 +29,14 @@ flutter packages pub run build_runner watch
 flutter run
 ```
 
-### Quick Build (uses build.sh)
+Quick build and run (generates code first):
 ```bash
 ./build.sh
+```
+
+### Testing
+```bash
+flutter test
 ```
 
 ## Architecture
@@ -45,12 +51,13 @@ The app follows a layered clean architecture pattern with dependency injection:
 ### Key Components
 
 #### Dependency Injection
-- Uses GetIt service locator pattern
-- Configuration in `lib/di/service_locator.dart`
+- Uses GetIt service locator pattern (accessed via `getIt` global instance)
+- Configuration in `lib/di/service_locator.dart` initializes all layers sequentially
 - Each layer has its own injection module:
-  - `DataLayerInjection.configureDataLayerInjection()`
-  - `DomainLayerInjection.configureDomainLayerInjection()`
-  - `PresentationLayerInjection.configurePresentationLayerInjection()`
+  - `DataLayerInjection` → `LocalModule`, `NetworkModule`, `RepositoryModule`
+  - `DomainLayerInjection` → Use cases
+  - `PresentationLayerInjection` → Stores and UI dependencies
+- All dependencies are registered as singletons during app initialization in `main.dart`
 
 #### State Management
 - **MobX** for reactive state management
@@ -58,22 +65,29 @@ The app follows a layered clean architecture pattern with dependency injection:
 - Generated files (`.g.dart`) are created by `build_runner` - these should not be edited manually
 
 #### Network Layer
-- **Dio** for HTTP client with interceptors for auth, logging, and retry
-- **Retrofit** for API generation (generates `.g.dart` files)
-- API definitions in `lib/data/network/apis/`
+- **Dio** HTTP client with interceptor chain (order matters):
+  1. `AuthInterceptor` - Adds Bearer token to requests
+  2. `AuthRetryInterceptor` - Retries failed auth requests with token refresh
+  3. `ErrorInterceptor` - Handles network errors and broadcasts via EventBus
+  4. `LoggingInterceptor` - Logs requests/responses
+- **Retrofit** for type-safe API generation (generates `.g.dart` files)
+- API definitions in `lib/data/network/apis/`: `UserApi`, `CategoryApi`, `ExercisesApi`, `MemoryApi`
+- Network configuration constants in `lib/data/network/constants/endpoints.dart`
 
 #### Local Storage
 - **Sembast** for local database
 - **SharedPreferences** for simple key-value storage
 - **XXTEA** encryption for sensitive data
 
-#### Features
-The app includes these main features:
-- Authentication (login/register)
-- Categories for learning content
-- Exercises with memory tracking
-- Multi-language support (Arabic fonts included)
-- Dark/light theme support
+#### Features & Screens
+The app includes these main features organized by presentation module:
+- **Auth** (`presentation/auth/`) - Login/register with JWT token storage
+- **Home** (`presentation/home/`) - Main navigation
+- **Category** (`presentation/category/`) - Browse learning categories
+- **Exercise** (`presentation/exercise/`) - Interactive exercises with audio playback
+- **Splash** (`presentation/splash/`) - App initialization screen
+- Multi-language support with localization files in `assets/lang/`
+- Dark/light theme support with custom theme extensions
 
 ## Project Structure
 
@@ -102,11 +116,16 @@ lib/
 ## Important Notes
 
 ### Code Generation
-- Run `flutter packages pub run build_runner build --delete-conflicting-outputs` after modifying:
-  - MobX store classes
-  - JSON serializable models
-  - Retrofit API interfaces
-- Generated `.g.dart` files should never be manually edited
+Generated `.g.dart` files should never be manually edited. Run code generation after modifying:
+- MobX store classes (annotated with `@observable`, `@action`, `@computed`)
+- JSON serializable models (annotated with `@JsonSerializable()`)
+- Retrofit API interfaces (annotated with `@RestApi()`)
+
+### App Initialization Flow
+1. `main.dart` initializes Flutter bindings and error handling
+2. `ServiceLocator.configureDependencies()` sets up all DI layers
+3. `MyApp` widget launches with pre-configured dependencies
+4. All stores and services are available via `getIt<Type>()`
 
 ### Assets
 - Multiple Arabic fonts are included in `assets/fonts/`

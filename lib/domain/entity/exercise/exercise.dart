@@ -13,10 +13,14 @@ class Exercise {
   @JsonKey(name: "audioUrl")
   final String audioUrl;
 
+  @JsonKey(name: "strikeCount")
+  final int strikeCount;
+
   const Exercise({
     required this.id,
     required this.value,
     required this.audioUrl,
+    required this.strikeCount,
   });
 
   factory Exercise.fromJson(Map<String, dynamic> json) =>
@@ -31,13 +35,14 @@ class Exercise {
           runtimeType == other.runtimeType &&
           id == other.id &&
           value == other.value &&
-          audioUrl == other.audioUrl;
+          audioUrl == other.audioUrl &&
+          strikeCount == other.strikeCount;
 
   @override
-  int get hashCode => id.hashCode ^ value.hashCode ^ audioUrl.hashCode;
+  int get hashCode => id.hashCode ^ value.hashCode ^ audioUrl.hashCode ^ strikeCount.hashCode;
 
   @override
   String toString() {
-    return 'Exercise{id: $id, value: $value, audioUrl: $audioUrl}';
+    return 'Exercise{id: $id, value: $value, audioUrl: $audioUrl, strikeCount: $strikeCount}';
   }
 }

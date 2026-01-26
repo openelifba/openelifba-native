@@ -135,76 +135,95 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
             ],
           ),
         ),
-        child: InkWell(
-          onTap: () => _playAudio(exercise),
-          borderRadius: BorderRadius.circular(20),
-          child: Padding(
-            padding: const EdgeInsets.all(32.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  decoration: BoxDecoration(
-                    color: exerciseColors.characterTileBg,
-                    borderRadius: BorderRadius.circular(16),
-                    boxShadow: [
-                      BoxShadow(
-                        color: exerciseColors.characterTileShadow,
-                        blurRadius: 10,
-                        offset: const Offset(0, 5),
-                      ),
-                    ],
-                  ),
-                  child: Text(
-                    exercise.value,
-                    style: TextStyle(
-                      fontSize: 48,
-                      fontWeight: FontWeight.bold,
-                      color: exerciseColors.characterTileText,
-                      fontFamily: 'Amiri',
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-                const SizedBox(height: 24),
-                Container(
-                  decoration: BoxDecoration(
-                    color: exerciseColors.audioButtonBg,
-                    borderRadius: BorderRadius.circular(50),
-                    boxShadow: [
-                      BoxShadow(
-                        color: exerciseColors.audioButtonShadow,
-                        blurRadius: 15,
-                        offset: const Offset(0, 8),
-                      ),
-                    ],
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(Icons.volume_up,
-                            color: exerciseColors.onAccent, size: 24),
-                        const SizedBox(width: 8),
-                        Text(
-                          AppLocalizations.of(context)
-                              .translate('btn_play_audio'),
-                          style: TextStyle(
-                            color: exerciseColors.onAccent,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
+        child: Stack(
+          children: [
+            InkWell(
+              onTap: () => _playAudio(exercise),
+              borderRadius: BorderRadius.circular(20),
+              child: Padding(
+                padding: const EdgeInsets.all(32.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.symmetric(vertical: 20),
+                      decoration: BoxDecoration(
+                        color: exerciseColors.characterTileBg,
+                        borderRadius: BorderRadius.circular(16),
+                        boxShadow: [
+                          BoxShadow(
+                            color: exerciseColors.characterTileShadow,
+                            blurRadius: 10,
+                            offset: const Offset(0, 5),
                           ),
+                        ],
+                      ),
+                      child: Text(
+                        exercise.value,
+                        style: TextStyle(
+                          fontSize: 48,
+                          fontWeight: FontWeight.bold,
+                          color: exerciseColors.characterTileText,
+                          fontFamily: 'Amiri',
                         ),
-                      ],
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    const SizedBox(height: 24),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: exerciseColors.audioButtonBg,
+                        borderRadius: BorderRadius.circular(50),
+                        boxShadow: [
+                          BoxShadow(
+                            color: exerciseColors.audioButtonShadow,
+                            blurRadius: 15,
+                            offset: const Offset(0, 8),
+                          ),
+                        ],
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(Icons.volume_up,
+                                color: exerciseColors.onAccent, size: 24),
+                            const SizedBox(width: 8),
+                            Text(
+                              AppLocalizations.of(context)
+                                  .translate('btn_play_audio'),
+                              style: TextStyle(
+                                color: exerciseColors.onAccent,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            if (exercise.strikeCount > 0)
+              Positioned(
+                top: 16,
+                right: 16,
+                child: Row(
+                  children: List.generate(
+                    exercise.strikeCount,
+                    (index) => const Icon(
+                      Icons.star,
+                      color: Colors.amber,
+                      size: 28,
                     ),
                   ),
                 ),
-              ],
-            ),
-          ),
+              ),
+          ],
         ),
       ),
     );
