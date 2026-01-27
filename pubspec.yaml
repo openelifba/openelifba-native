@@ -133,3 +133,6 @@ flutter:
     - family: K12345
       fonts:
         - asset: assets/fonts/K12345-Regular.ttf
+    - family: K1
+      fonts:
+        - asset: assets/fonts/k1.ttf

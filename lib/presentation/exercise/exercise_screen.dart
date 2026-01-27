@@ -162,10 +162,12 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
                       child: Text(
                         exercise.value,
                         style: TextStyle(
-                          fontSize: 48,
-                          fontWeight: FontWeight.bold,
+                          fontSize: 64,
+                          fontWeight: FontWeight.w400,
                           color: exerciseColors.characterTileText,
-                          fontFamily: 'Amiri',
+                          fontFamily: 'K1',
+                          letterSpacing: 0,
+                          height: 1,
                         ),
                         textAlign: TextAlign.center,
                       ),
@@ -196,8 +198,9 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
                                   .translate('btn_play_audio'),
                               style: TextStyle(
                                 color: exerciseColors.onAccent,
-                                fontSize: 16,
+                                fontSize: 18,
                                 fontWeight: FontWeight.w600,
+                                letterSpacing: 0.5,
                               ),
                             ),
                           ],
@@ -245,8 +248,9 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
                 AppLocalizations.of(context).translate('btn_need_practice'),
                 style: const TextStyle(
                     color: Colors.white,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold),
+                    fontSize: 18,
+                    fontWeight: FontWeight.w700,
+                    letterSpacing: 0.5),
               ),
               style: ElevatedButton.styleFrom(
                 backgroundColor: colors.needPracticeButtonBg,
@@ -268,8 +272,9 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
                 AppLocalizations.of(context).translate('btn_mastered'),
                 style: const TextStyle(
                     color: Colors.white,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold),
+                    fontSize: 18,
+                    fontWeight: FontWeight.w700,
+                    letterSpacing: 0.5),
               ),
               style: ElevatedButton.styleFrom(
                 backgroundColor: colors.masteredButtonBg,
@@ -305,8 +310,10 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
             AppLocalizations.of(context)
                 .translate('all_exercises_completed_body'),
             style: TextStyle(
-              fontSize: 16,
+              fontSize: 18,
               color: colors.completionBodyText,
+              height: 1.5,
+              letterSpacing: 0.3,
             ),
             textAlign: TextAlign.center,
           ),
@@ -326,8 +333,9 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
                       AppLocalizations.of(context).translate('btn_return_home'),
                       style: const TextStyle(
                         color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w700,
+                        letterSpacing: 0.5,
                       ),
                     ),
                     style: ElevatedButton.styleFrom(
@@ -354,8 +362,9 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
                           .translate('btn_practice_again'),
                       style: const TextStyle(
                         color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w700,
+                        letterSpacing: 0.5,
                       ),
                     ),
                     style: ElevatedButton.styleFrom(

@@ -76,16 +76,17 @@ class AppThemeData {
   static const _semiBold = FontWeight.w600;
   static const _bold = FontWeight.w700;
 
+  // Nunito: Rounded, friendly font perfect for learners - highly readable
   static final TextTheme _textTheme = TextTheme(
-    headlineMedium: GoogleFonts.montserrat(fontWeight: _bold, fontSize: 20.0),
-    bodySmall: GoogleFonts.oswald(fontWeight: _semiBold, fontSize: 16.0),
-    headlineSmall: GoogleFonts.oswald(fontWeight: _medium, fontSize: 16.0),
-    titleMedium: GoogleFonts.montserrat(fontWeight: _medium, fontSize: 16.0),
-    labelSmall: GoogleFonts.montserrat(fontWeight: _medium, fontSize: 12.0),
-    bodyLarge: GoogleFonts.montserrat(fontWeight: _regular, fontSize: 14.0),
-    titleSmall: GoogleFonts.montserrat(fontWeight: _medium, fontSize: 14.0),
-    bodyMedium: GoogleFonts.montserrat(fontWeight: _regular, fontSize: 16.0),
-    titleLarge: GoogleFonts.montserrat(fontWeight: _bold, fontSize: 16.0),
-    labelLarge: GoogleFonts.montserrat(fontWeight: _semiBold, fontSize: 14.0),
+    headlineMedium: GoogleFonts.nunito(fontWeight: _bold, fontSize: 22.0, height: 1.4),
+    bodySmall: GoogleFonts.nunito(fontWeight: _semiBold, fontSize: 16.0, height: 1.5),
+    headlineSmall: GoogleFonts.nunito(fontWeight: _semiBold, fontSize: 18.0, height: 1.4),
+    titleMedium: GoogleFonts.nunito(fontWeight: _medium, fontSize: 18.0, height: 1.5),
+    labelSmall: GoogleFonts.nunito(fontWeight: _medium, fontSize: 14.0, height: 1.4),
+    bodyLarge: GoogleFonts.nunito(fontWeight: _regular, fontSize: 16.0, height: 1.6),
+    titleSmall: GoogleFonts.nunito(fontWeight: _medium, fontSize: 16.0, height: 1.5),
+    bodyMedium: GoogleFonts.nunito(fontWeight: _regular, fontSize: 18.0, height: 1.6),
+    titleLarge: GoogleFonts.nunito(fontWeight: _bold, fontSize: 18.0, height: 1.4),
+    labelLarge: GoogleFonts.nunito(fontWeight: _semiBold, fontSize: 16.0, height: 1.5),
   );
 }

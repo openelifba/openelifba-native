@@ -113,8 +113,10 @@ class _CategoryScreenState extends State<CategoryScreen> {
                             AppLocalizations.of(context)
                                 .translate('no_categories_available'),
                             style: TextStyle(
-                              fontSize: 18,
+                              fontSize: 20,
                               color: Colors.grey.shade700,
+                              letterSpacing: 0.3,
+                              height: 1.4,
                             ),
                           ),
                         ],
@@ -212,9 +214,11 @@ class _CategoryScreenState extends State<CategoryScreen> {
                               AppLocalizations.of(context)
                                   .translate(category.name),
                               style: const TextStyle(
-                                fontSize: 22,
-                                fontWeight: FontWeight.bold,
+                                fontSize: 24,
+                                fontWeight: FontWeight.w700,
                                 color: Colors.black87,
+                                letterSpacing: 0.5,
+                                height: 1.3,
                               ),
                             ),
                           ),
@@ -421,19 +425,21 @@ class _CategoryScreenState extends State<CategoryScreen> {
                 Text(
                   label,
                   style: TextStyle(
-                    fontSize: 12,
+                    fontSize: 14,
                     color: Theme.of(context)
                         .colorScheme
                         .onSurface
-                        .withValues(alpha: 0.6),
+                        .withValues(alpha: 0.7),
+                    letterSpacing: 0.3,
                   ),
                 ),
                 Text(
                   value,
                   style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w700,
                     color: Theme.of(context).colorScheme.onSurface,
+                    letterSpacing: 0.3,
                   ),
                 ),
               ],
@@ -491,9 +497,10 @@ class _CategoryScreenState extends State<CategoryScreen> {
                 Text(
                   label,
                   style: TextStyle(
-                    fontSize: 14,
+                    fontSize: 16,
                     color: colors.actionButtonText,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w600,
+                    letterSpacing: 0.3,
                   ),
                 ),
               ],

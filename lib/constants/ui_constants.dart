@@ -21,12 +21,15 @@ class UIConstants {
   static const double iconSizeLarge = 32.0;
   static const double iconSizeXLarge = 48.0;
 
-  // Font sizes
-  static const double fontSizeSmall = 12.0;
-  static const double fontSizeMedium = 14.0;
-  static const double fontSizeLarge = 16.0;
-  static const double fontSizeXLarge = 18.0;
-  static const double fontSizeXXLarge = 22.0;
+  // Font sizes (learner-friendly - larger for better readability)
+  static const double fontSizeSmall = 14.0;
+  static const double fontSizeMedium = 16.0;
+  static const double fontSizeLarge = 18.0;
+  static const double fontSizeXLarge = 20.0;
+  static const double fontSizeXXLarge = 24.0;
+
+  // Arabic character display (extra large for learning)
+  static const double fontSizeArabicCharacter = 80.0;
 
   // Elevation
   static const double elevationLow = 2.0;
