@@ -18,7 +18,10 @@ import 'package:openelifba/presentation/home/store/theme/theme_store.dart';
 import 'package:openelifba/presentation/auth/store/user_store.dart';
 
 import '../../../di/service_locator.dart';
+import '../../../domain/usecase/scorecard/get_scorecard_usecase.dart';
+import '../../../domain/usecase/user/get_user_id_usecase.dart';
 import '../../../domain/usecase/user/register_usecase.dart';
+import '../../scorecard/store/scorecard_store.dart';
 
 class StoreModule {
   static Future<void> configureStoreModuleInjection() async {
@@ -67,6 +70,14 @@ class StoreModule {
       ExerciseStore(
         getIt<GetDueExercisesUseCase>(),
         getIt<UpdateMemoryUseCase>(),
+        getIt<ErrorStore>(),
+      ),
+    );
+
+    getIt.registerSingleton<ScorecardStore>(
+      ScorecardStore(
+        getIt<GetScoreboardUseCase>(),
+        getIt<GetUserIdUseCase>(),
         getIt<ErrorStore>(),
       ),
     );
