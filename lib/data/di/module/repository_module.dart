@@ -11,13 +11,16 @@ import 'package:openelifba/domain/repository/user/user_repository.dart';
 import '../../../di/service_locator.dart';
 import '../../../domain/repository/category/category_repository.dart';
 import '../../../domain/repository/exercises/exercises_repository.dart';
+import '../../../domain/repository/scorecard/scorecard_repository.dart';
 import '../../network/apis/category/category_api.dart';
 import '../../network/apis/exercises/exercises_api.dart';
 import '../../network/apis/memory/memory_api.dart';
+import '../../network/apis/scorecard/scorecard_api.dart';
 import '../../network/apis/user/user_api.dart';
 import '../../repository/category/category_repository_impl.dart';
 import '../../repository/exercises/exercises_repository_impl.dart';
 import '../../repository/memory/memory_repository_impl.dart';
+import '../../repository/scorecard/scorecard_repository_impl.dart';
 import '../../repository/user/user_repository_impl.dart';
 
 class RepositoryModule {
@@ -42,6 +45,10 @@ class RepositoryModule {
 
     getIt.registerSingleton<MemoryRepository>(MemoryRepositoryImpl(
       getIt<MemoryApi>(),
+    ));
+
+    getIt.registerSingleton<ScoreboardRepository>(ScoreboardRepositoryImpl(
+      getIt<ScoreboardApi>(),
     ));
   }
 }
