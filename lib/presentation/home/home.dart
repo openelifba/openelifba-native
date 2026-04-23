@@ -39,10 +39,21 @@ class _HomeScreenState extends State<HomeScreen> {
 
   List<Widget> _buildActions(BuildContext context) {
     return <Widget>[
+      _buildScorecardButton(),
       _buildLanguageButton(),
       _buildThemeButton(),
       _buildLogoutButton(),
     ];
+  }
+
+  Widget _buildScorecardButton() {
+    return IconButton(
+      onPressed: () {
+        Navigator.of(context).pushNamed(Routes.scorecard);
+      },
+      icon: const Icon(Icons.leaderboard),
+      tooltip: 'Scoreboard',
+    );
   }
 
   Widget _buildThemeButton() {

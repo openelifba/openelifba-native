@@ -15,6 +15,9 @@ import 'package:openelifba/domain/usecase/user/login_usecase.dart';
 import 'package:openelifba/domain/usecase/user/save_login_in_status_usecase.dart';
 
 import '../../../di/service_locator.dart';
+import '../../repository/scorecard/scorecard_repository.dart';
+import '../../usecase/scorecard/get_scorecard_usecase.dart';
+import '../../usecase/user/get_user_id_usecase.dart';
 import '../../usecase/user/register_usecase.dart';
 
 class UseCaseModule {
@@ -51,6 +54,16 @@ class UseCaseModule {
     // memory:------------------------------------------------------------------
     getIt.registerSingleton<UpdateMemoryUseCase>(
       UpdateMemoryUseCase(getIt<MemoryRepository>()),
+    );
+
+    // user id:-----------------------------------------------------------------
+    getIt.registerSingleton<GetUserIdUseCase>(
+      GetUserIdUseCase(getIt<UserRepository>()),
+    );
+
+    // scorecard:---------------------------------------------------------------
+    getIt.registerSingleton<GetScoreboardUseCase>(
+      GetScoreboardUseCase(getIt<ScoreboardRepository>()),
     );
   }
 }

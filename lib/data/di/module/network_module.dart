@@ -13,6 +13,7 @@ import '../../../di/service_locator.dart';
 import '../../network/apis/category/category_api.dart';
 import '../../network/apis/exercises/exercises_api.dart';
 import '../../network/apis/memory/memory_api.dart';
+import '../../network/apis/scorecard/scorecard_api.dart';
 
 class NetworkModule {
   static Future<void> configureNetworkModuleInjection() async {
@@ -51,5 +52,6 @@ class NetworkModule {
     getIt.registerSingleton<CategoryApi>(CategoryApi(getIt<Dio>()));
     getIt.registerSingleton<ExercisesApi>(ExercisesApi(getIt<Dio>()));
     getIt.registerSingleton<MemoryApi>(MemoryApi(getIt<Dio>()));
+    getIt.registerSingleton<ScoreboardApi>(ScoreboardApi(getIt<Dio>()));
   }
 }

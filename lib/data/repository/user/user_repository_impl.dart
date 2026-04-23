@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:openelifba/data/network/apis/user/user_api.dart';
 import 'package:openelifba/domain/repository/user/user_repository.dart';
@@ -29,6 +30,10 @@ class UserRepositoryImpl extends UserRepository {
         "password": params.password,
       });
       _sharedPrefsHelper.saveAuthToken(user.token);
+      final extractedUserId = _extractUserIdFromToken(user.token);
+      if (extractedUserId != null) {
+        _sharedPrefsHelper.saveUserId(extractedUserId);
+      }
       return user;
     } catch (error) {
       _sharedPrefsHelper.removeAuthToken();
@@ -58,4 +63,35 @@ class UserRepositoryImpl extends UserRepository {
 
   @override
   Future<bool> get isLoggedIn => _sharedPrefsHelper.isLoggedIn;
+
+  @override
+  String? get userId => _sharedPrefsHelper.userId;
+
+  // Decodes the JWT payload and extracts the 'sub' claim as the user ID.
+  String? _extractUserIdFromToken(String token) {
+    try {
+      final parts = token.split('.');
+      if (parts.length != 3) return null;
+
+      String payload = parts[1]
+          .replaceAll('-', '+')
+          .replaceAll('_', '/');
+      switch (payload.length % 4) {
+        case 2:
+          payload += '==';
+          break;
+        case 3:
+          payload += '=';
+          break;
+      }
+
+      final decodedBytes = base64Decode(payload);
+      final decodedString = utf8.decode(decodedBytes);
+      final claims = jsonDecode(decodedString) as Map<String, dynamic>;
+      return claims['sub']?.toString();
+    } catch (e) {
+      AppLogger.error('Failed to extract user ID from token', 'UserRepository', e);
+      return null;
+    }
+  }
 }
